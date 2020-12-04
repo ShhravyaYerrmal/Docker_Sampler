@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-kuber1-deployment
+  labels:
+    app: docker-kuber1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docker-kuber1
+  template:
+    metadata:
+      labels:
+        app: docker-kuber1
+    spec:
+      containers:
+      - name: docker-kuber1
+        image: shravyadockerid/docker-demo1:firstImage
+        
+        ports: 
+        - containerPort: 8081          

@@ -1,0 +1,700 @@
+Imagine you’re developing an application. You do your work on a laptop and your environment has a specific configuration. Other developers may have slightly different configurations. The application you’re developing relies on that configuration and is dependent on specific libraries, dependencies, and files. Meanwhile, your business has development and production environments that are standardized with their own configurations and their own sets of supporting files. You want to emulate those environments as much as possible locally, but without all the overhead of recreating the server environments. 
+
+So, how do you make your app work across these environments, pass quality assurance, and get your app deployed without massive headaches, rewriting, and break-fixing? The answer: Containers.
+
+The idea of what we now call container technology first appeared in 2000 as FreeBSD jails, a technology that allows the partitioning of a FreeBSD system into multiple subsystems, or jails. Jails were developed as safe environments that a system administrator could share with multiple users inside or outside of an organization.
+In 2001, an implementation of an isolated environment made its way into Linux, by way of Jacques Gélinas’ VServer project. Once this foundation was set for multiple controlled user spaces in Linux, pieces began to fall into place to form what is today’s Linux container.
+Difference between linux container and virtual machines :
+
+Linux- based container is an evolving cloud technology constructed on quick and light weight process virtualization whereas a virtual machine is an application environment that isolates the operating system and shares the physical hardware resources with several users. Containers wraps up the OS kernel and creates a secure isolated runtime environment like a standard linux without requiring a separate kernel. In a VM, the hypervisor abstracts the entire device and creates an image comprising an entire OS, machine setup, including hard drive, virtual processors and network interfaces. 
+
+
+
+A container can contain as minute as a single process. No need to install guest OS. In contrast, a VM has to run a complete operating system. Each VM required a separate OS installation and sometimes even different licensing for OS in each VM.
+Containers rest on top of a single Linux instance, where all containers beneath a host must run under the same kernel and operating system. A VM has a broader scope and hypervisors can run instances of various operating systems or kernels at the same time. Container-based virtualization alters an existing OS in order to offer extra isolation. VM provides better isolation as there are fewer compatibility requirements due to separate kernels. The containers use host's kernel, OS and device drivers and thus containers are smaller and lightweight than VMs. A virtual machine offers a complete OS with the associated overhead of virtualized device drivers, processors, memory management, etc. Greater portability to wherever same kernel is available. Portability is guaranteed within systems running same hypervisor. Speed: Starting or shutting down a container is much faster. VM would require more time. More containers per machine are possible. Less number of VM's are possible per machine than containers. Managing Security and crashes are easier in containers: It limits the attacked space. You may kill the compromised containers immediately and launch new. Not this easy with VM. Containers are software-centric and were designed with software-developers in mind. VMs are hardware-centric and were designed with machine-operators in mind.
+
+while the fact that containers share the kernel creates great benefits, it is also responsible for the limitation of running Windows and Linux in parallel on the same host. In addition, each of the containers is isolated from one another but can still see some data through the host. Therefore, there is still a chance that the shared kernel will be exploited, which could lead to performance degradation and security breaches on other containers that are running on the same host.
+
+Although sometimes confused, Docker is not the same as a traditional Linux container. Docker technology was initially built on top of the LXC technology—which most people associate with "traditional” Linux containers—though it’s since moved away from that dependency. LXC was useful as lightweight virtualization, but it didn’t have a great developer or user experience. The Docker technology brings more than the ability to run containers—it also eases the process of creating and building containers, shipping images, and versioning of images, among other things.
+
+In 2008, Docker came onto the scene (by way of dotCloud) with their eponymous container technology. The docker technology added a lot of new concepts and tools—a simple command line interface for running and building new layered images, a server daemon, a library of pre-built container images, and the concept of a registry server. Combined, these technologies allowed users to quickly build new layered containers and easily share them with others.
+There are 3 major standards to ensure interoperability of container technologies—the OCI Image, Distribution, and Runtime specifications. Combined these specifications allow community projects, commercial products, and cloud providers to build interoperable container technologies (think pushing your custom built images into a cloud provider’s registry server - you need that to work). Today Docker, among many others, are members of the Open Container Initiative (OCI)—are enabling an open, industry standardization of container technologies.
+
+
+
+Traditional Linux containers use an init system that can manage multiple processes. This means entire applications can run as one. The Docker technology encourages applications to be broken down into their separate processes and provides the tools to do that. This granular approach has its advantages.
+
+As DevOps is gaining popularity, organizations have started adopting containerization by breaking complex monolithic applications into smaller, modular micro services. 
+
+Containers have simplified application delivery, deployment and management. With Docker, you can treat containers like extremely lightweight, modular virtual machines. And you get flexibility with those containers—you can create, deploy, copy, and move them from environment to environment, which helps optimize your apps for the cloud.
+
+Several educational, financial, payment, travel industries such as Cornell University, Metlife, Paypal, Expedia etc. have adopted Docker containers. 
+
+As businesses are constantly evolving, it often leads to modernizing of applications by bringing new updates and enhancements.
+While doing so, some common challenges could be observed as following:
+	• Manual updates causing slower productions
+	• Higher integration time and turnaround time for revisions
+	• High cost for enhancements⬚("Type equation here." )
+
+Solution:
+Docker helps to quickly build, ship and run applications easily. It allows you to make rapid deployments to meet business demands. 
+It provides a simplified, efficient and automated platform for micro services application deployment and maintenance.
+Some of the benefits are stated below:
+	• Docker Hub provides tools to automatically build and deploy revisions to release latest patches quickly
+	• It offers Secure and centralized repository to maintain application packages, version upgrades and define access to users
+	• Docker helps to reduce the overall cost of enhancements due to simplified maintenance and management 
+	• It allows high availability of applications and increases productivity of developers
+You can use Docker for packaging applications, scaling web apps, databases and backend services to deploy them automatically.
+
+Docker is open source and written in Google’s Go language. 
+
+Docker is based on containerization (OS-level virtualization), where the physical server and operating system are virtualized to produce multiple instances. 
+
+Docker is an application container and runs one service or application in a runtime instance. Though, several applications can run independently in isolated containers.
+Observe the below diagram, it represents 3 different applications running in separate containers:
+						
+ 
+A Docker container is an environment that contains application code, software package, system tools, libraries, services, dependencies etc. 
+Docker provides a rapid development cycle for developers and sysadmins. 
+Developers can emphasize on building applications. Sysadmins can emphasize on deployment. While, both can still collaborate their work together on a shared framework. 
+
+Docker adopts a client/server architecture. The Docker client talks to the Docker daemon, which does the heavy lifting of building, running, and distributing your Docker containers. The Docker client and daemon can run on the same system, or you can connect a Docker client to a remote Docker daemon. The Docker client and daemon communicate using a REST API, over UNIX sockets or a network interface.
+
+ Docker client (docker): is the primary way that many Docker users interact with Docker. When you use commands such as docker run, the client sends these commands to dockerd, which carries them out. The docker command uses the Docker API. The Docker client can communicate with more than one daemon.
+
+
+Docker Daemon: Daemon builds, runs, and ships containers and can exist on same or different hosts.
+The Docker daemon (dockerd) listens for Docker API requests and manages Docker objects such as images, containers, networks, and volumes. A daemon can also communicate with other daemons to manage Docker services.
+			
+
+Docker components:
+Docker Engine is a packaging tool which provides a powerful work flow for building and containerizing your applications. It helps to build, ship, run and manage the containers
+Docker Hub hosts a registry to upload and manage your apps and offers automated workflows
+Docker image (a build component) is a read only template, which is used to create Docker containers. You can reuse existing images, or build new as you require them.
+An image is a read-only template with instructions for creating a Docker container. Often, an image is based on another image, with some additional customization. For example, you may build an image which is based on the ubuntu image, but installs the Apache web server and your application, as well as the configuration details needed to make your application run.
+You might create your own images or you might only use those created by others and published in a registry. To build your own image, you create a Dockerfile with a simple syntax for defining the steps needed to create the image and run it. Each instruction in a Dockerfile creates a layer in the image. When you change the Dockerfile and rebuild the image, only those layers which have changed are rebuilt. This is part of what makes images so lightweight, small, and fast, when compared to other virtualization technologies.
+
+Docker registry (a store component) hold images in a public store (called the Docker Hub) or a private store.
+A Docker registry stores Docker images. Docker Hub is a public registry that anyone can use, and Docker is configured to look for images on Docker Hub by default. You can even run your own private registry.
+When you use the docker pull or docker run commands, the required images are pulled from your configured registry. When you use the docker push command, your image is pushed to your configured registry.
+
+Docker container (a run component) holds applications along with dependencies/components/libraries. Container are built from Docker images.
+A container is a runnable instance of an image. You can create, start, stop, move, or delete a container using the Docker API or CLI. You can connect a container to one or more networks, attach storage to it, or even create a new image based on its current state.
+By default, a container is relatively well isolated from other containers and its host machine. You can control how isolated a container’s network, storage, or other underlying subsystems are from other containers or from the host machine.
+A container is defined by its image as well as any configuration options you provide to it when you create or start it. When a container is removed, any changes to its state that are not stored in persistent storage disappear.
+
+Setup and configure:
+
+OPTION 1:  
+
+A] Install docker desktop and follow the steps given in the link:
+https://docs.docker.com/docker-for-windows/
+B] Study Docker Dashboard:
+https://docs.docker.com/desktop/dashboard/
+C] Updating the WSL 2 Linux kernel if required
+https://docs.microsoft.com/en-gb/windows/wsl/wsl2-kernel
+D] Create Docker ID
+
+OPTION 2:
+Use docker playground: https://labs.play-with-docker.com/#
+
+A]Sign in and start 
+B]Add instance
+C]Commands
+	1. Check supported version of Docker:
+	docker --version
+	2.  Find details about your docker installation
+		○ Login as root user suing following command and give the root user password:
+		sudo su
+		○ Extract metadata or information about Docker using following command:
+		docker info
+
+OPTION 3: 
+Start an instance on any cloud provider and work on linux VM
+
+
+Launching Containers:
+
+We can launch containers in two mode:
+
+1. Interactive mode which provides terminal access (in foreground) to run commands inside the container and get the output. You can easily disconnect and connect back to running environments.
+2. Daemonized mode which are run long running background processes. You can observe the working output of container processes running in background.
+
+
+
+
+Command to launch container:
+docker run [options] <imagename>:<tagname>  <commandname>
+
+• docker run - launches a container based on a Docker image
+• imagename - is the packaged software i.e. Docker image. Docker Daemon searches for the image on the local Docker host first. In case, there is no such image, then it downloads the image from Docker Hub (library for container images) automatically
+• tagname - is the version
+• options - are flags to be used with the command
+• commandname - specifies command to run inside container
+
+Docker run creates a new container, allocates file system, network interface, IP, mounts a read-write layer and finally executes the process. It ensures availability of all the libraries, services, dependencies required for the application.
+
+Interactive containers:
+Use following options in the docker run command to run containers in an interactive mode:
+	• –i flag - to make an interactive connection using standard input (STDIN) in container
+	• –t flag - to assign a pseudo terminal/TTY inside the container that attaches stdin and stdout
+	• --rm=false -   to automatically remove the container when it exits. Usually, we use --rm flag for commands that run in foreground, to clean up the container after the command has completed
+	
+	
+Step 1: manage docker daemon:
+Before launching containers, ensure that the Docker daemon service is running on your host.
+	 systemctl start docker
+Check the service status:
+	systemctl status docker
+To restart or stop the Docker daemon, using following command:
+	systemctl <stop| restart> docker
+
+## systemctl doesn't works then use service
+
+Step 2: Launch interactive containers using following command:
+ docker run --rm=false -i -t ubuntu:latest  /bin/bash
+
+Once the container runs, a pseudo terminal is instantiated and hostname of container will be shown in the shell prompt. 
+You can now execute commands in this bash shell.
+
+Step 3: Explore root file system of container
+Docker creates a writable layer on top of base image where you can edit files or make some changes in the filesystem.
+
+##Inside the container, command’s process is always PID 1. List the processes running on the container using following command: 
+  ps aux
+
+It displays the bash session (PID 1) 
+
+Step 4: Exit or disconnect from the container
+You can use below options:
+	• exit command - to terminate the container
+	• CTRL-p + CTRL-q: to disconnect temporarily without terminating the container
+ 
+
+Step 5: List container process:
+#List running containers, using following command:
+	 docker ps
+#Use flag –a to list all containers (including those terminated/shutdown)
+	docker ps -a
+
+Daemonized containers:
+Use following options in the docker run command to run containers in a daemonized mode:
+	• -d flag - to run a container in the background
+	• --name=container_name - to assign a user-defined name to container
+
+Step 1: Launch daemonized containers
+Use a simple while loop in an ubuntu bash shall to create an ongoing background process, using following command:
+	docker run --name my_daemonized -d ubuntu /bin/sh -c "while true; do echo my daemonized container; sleep 1; done "
+
+ 
+This command returns a long string i.e called as <container id> to uniquely identify the container.
+While running 'docker ps' command, you will find a shorter variant of  container ID i.e. b83e11528b95 as well.
+ 
+Step 2: Observe the standard output of container
+Use following command to observe standard output of container running in background:
+
+	 docker logs <container_name/container_id>
+ 
+
+ 
+Step 3: Start a new process inside an already running daemonized Docker Container
+To start a new process inside the Docker Container, use the following command:
+
+	 docker exec <container_name/container_id> <process-name>
+ 
+You can either run a new background process or get terminal access on the same container.
+	• Create a new background process
+Crete a directory /tmp/test, as shown below:
+
+	docker exec -d my_daemonized mkdir /tmp/test
+ 
+	• Getting terminal access on same container 
+Run a bash shell inside and get terminal access on the container, as shown below:
+
+	docker exec -it my_daemonized /bin/bash
+ 
+Miscellaneous Commands:
+Manage the container processes (stop, restart, kill, delete) or even delete the environments which are no longer required (mostly test environments).
+Step 1: Start, stop, restart containers
+You can start, stop, restart containers using following command:
+
+	 docker <start| stop | restart> <container name/ container ID>
+ 
+Use ‘docker kill’ command for forcefully stopping the container.
+
+Step 2: Connect to existing containers
+You can only connect to running containers. 
+Observe below screenshot where:
+	1. A container is launched and disconnected using CTRP-p+CTRL-q
+	2. Use ‘docker ps’ to list the container process and check its container id 
+ 
+Use following command to attach to the container:
+
+	 docker attach <container name/ container ID>
+ 
+ 
+Step 3:  Delete containers
+Containers should be stopped before deleting it, else it gives error.
+Observe the screenshot below:
+	1. List running processes
+	2. Deleting it throws error
+ 
+Use following command to delete containers:
+
+	 docker rm <container name/ container ID>
+
+Extract information about container processes, the resource usage and metadata of each container
+Step 1: Observe Container’s resource usage
+You can display Container’s resource usage statistics using following command:
+
+	 docker stats <container name/container_id>
+	 docker stats my_daemonized
+ 
+Observe the below output:
+ 
+Step 2: Inspect changes on a container's file system
+Inspect changes on a container's file system using:
+
+	 docker diff <container name/container_id>
+ 
+Launch a container, make some file system changes to it and run the command.
+Observe the below screenshot:
+	1. Launch an ubuntu container
+	2. List newly created files
+	3. Use 'docker diff' command to inspect changes
+ 
+Step 3: Extract metadata about a Container
+You can fetch metadata of Docker Container, using following command:
+
+	 docker inspect <container name/container_id>
+ 
+ 
+It queries the specific container and return meta-data such as storage driver, hostname, networking details, cpu and memory details etc.
+ 
+ Build and customize software and application packages:
+
+During different phases of application development and deployment cycle, you would want to:
+	• Download several required environments and Customize environments easily
+	• Modify the application environments without complexities
+	• Replicate environments and share with operations and testing teams
+
+Docker images and Docker file is the solution to address these requirements.
+
+Docker images are packaged form of applications or programs in the file system.
+	• The file system comprises of everything required for its execution (i.e. code, runtime, system tools, system libraries) which ensures that the application will always run irrespective of the environment
+	• These are read only templates used to build containers (an environment to run applications)
+Images are pulled from Docker Hub and stored on Docker Host as shown below:
+
+		
+
+
+Advantages of Docker image:
+	• It allows rapid development cycle. You can quickly pull applications, test them and execute instantaneously on several platforms
+	• It provides reproducible infrastructure to release latest patches quickly. It allows easy modifications and efficient versioning of applications by tagging, committing changes or doing rollback
+	• It comprises of the application and its dependencies and are easily portable across Docker enabled machines
+	• You can easily distribute and manage the Docker images into the Docker Hub or a local registry
+	
+Step 1: Listing images on the host
+Images are pulled from Docker Hub and once downloaded, Docker stores images on Docker Host. To see all the downloaded images already present on the host, use following command:
+
+	 docker images 
+ 
+
+ 
+Step 2: Pulling a Docker image
+	• Images pulled from Docker Hub:
+'docker run' command pulls an image automatically if it is not present on the local host.
+But, as this is a time consuming activity, you can load images prior to launch of a container,.
+Following command pull images from the Docker Hub repository:
+
+	 docker pull image: tag 
+ 
+Note: If the above command fails, there could be firewall restrictions in your network which could be blocking internet access via command line. So either switch your network to public access or modify proxy settings to allow internet connectivity for above command to run.
+ 
+	• Pulling Docker image from Private hub:
+Docker images can also be pulled in a similar fashion from a private repository hosted on your machine.
+You can run the local registry using following command:
+
+	 docker run -d -p 5000:5000 --restart=always --name registry registry:2 
+ 
+Use following commands to test and use local registry server:
+
+	#To verify if the registry server is running, use following command:
+	 systemctl status docker-registry
+	#The local URL of registry server is as follows, hit the URL using curl command:
+	 curl http://localhost:5000
+	#In order to pull images from local registry, use following command:
+	 docker pull localhost:5000/image:tag 
+ 
+ 
+Step 3: Loading a tar image file
+If you are given Docker image files as tar files, you can still load them as Docker images on your host.
+	• Load an image from a tar archive using following command:
+	 docker load < imagetarfile 
+It restores both images and tags.
+	• Observe the below commands, to load an image on Docker host:
+
+	#Step 1: List the "golang" Docker image on the host using following command:
+	docker images | grep golang
+	#Step 2: Move to the directory, where you have .tar golang image file:
+	 cd /home/admin/DockerImages
+	ls -l | grep golang
+	#Step 3: Load this image using following command:
+	docker load < golang.tar
+	#List the Docker image 
+	docker images | grep golang
+ 
+ 
+Step 4: Tagging and untagging a Docker image
+	• The image repository can hold many variants of an image which are called image tags
+	• These are unique tags specified as repository:tag. In case no tag is given, it takes up latest Image tag by default       
+For example, 12.04 is the tag/version of Ubuntu image in the following command:
+
+	1.  docker run -t -i ubuntu:12.04 /bin/bash 
+ 
+	• Tagging an image:
+Observe the below screenshot and follow these steps:
+
+	#Step 1: List an image
+	 docker images | grep golang
+	#Step 2: Tag a new version of an existing image using below command:
+	docker tag golang:latest golangproj:ver1
+	#Step 3: List the images and observe the below tags:
+	docker images | grep golang
+ 
+Observe the below screenshot:
+ 
+	• Untagging an image:
+To remove an image tag, use following command:
+
+	 docker rmi golangproj:ver1 
+ 
+Note: This will remove the image, if that is the only version left.
+ 
+Step 5: Removing Docker images
+	• To remove an image, use following command:
+
+	docker rmi repos:tag 
+ 
+	• Removal of image is allowed only if there are no associated containers with that image. So ensure to delete all the containers and then remove the image gracefully
+	• For forceful deletion of the image, -f option is used as shown below:
+
+	 docker rmi –f repos:tag 
+	
+	
+	
+To make modifications and maintain versions, you will require to customize Docker images
+There are two ways of creating a custom image:
+	1. Modifying an existing Docker image using Docker container
+	2. Customizing Docker images using Dockerfile
+
+
+Step 1: Launch a container from existing image
+Run an ubuntu container using following command:
+
+ docker run --name ubuntuproj -t -i ubuntu:latest /bin/bash
+ 
+Step 2: Install new packages inside the container
+You could make some file system changes or install required utilities. Exit the container using exit command.
+ 
+Step 3: Commit the changes
+Save changes/updates in a container as a new image.
+Commit the changes using 'docker commit' command as shown below:
+
+	#Command Syntax
+	docker commit [options] [container name or container ID] [repository:tag]
+	docker commit -m "version information" -a "author_name" <container_name/container_id>  imagename:tag
+	# -m flag is used for mentioning a commit message
+	# -a flag allows us to specify an author for our update
+	#Commit the ubuntu image 
+	docker commit -m "version 1.1" -a "amandeep" ubuntuproj ubuntu:1.1
+ 
+It stores only the delta between the source image and current state of the container’s image.
+ 
+Step 4: Launch a new container using the customized image
+Use the customized Docker image to launch a container from it. 
+
+ 
+Dockerfile:
+A Dockerfile is a text file of instructions used to build or customize a Docker image.
+Dockerfile creates an automated build that executes several commands run in sequence to create an image.
+Advantages of Dockerfile:
+	• Dockerfile helps to build Docker images faster 
+	• Complete deployment is handled by Dockerfiles and containers. Docker Hub also provides tools to automatically build and deploy revisions
+
+Creating a customized Docker Image using Dockerfile:
+Build new images using set of instructions as shown below:
+FROM – tells about the base image
+MAINTAINER – author who maintains our image
+LABEL – Metadata/key-value pairs (used to search the images)
+ENV – allows to set the shell variables (used while building the image)
+RUN – to install software dependency within the base image  
+ADD – to copy file system from your local to your image
+WORKDIR – to change working directory
+CMD – defines command which should run by default inside the container when it is launched
+USER – by default ROOT user
+
+Step 1: Write a Dockerfile
+Below is an example of a Dockerfile:
+  vi Dockerfile
+
+	FROM ubuntu
+	MAINTAINER Aman amandeep_kaur09@infosys.com
+	LABEL "rating"="5stars" class="Wow"
+	USER root
+	ENV AP /data/app
+	RUN mkdir -p /var/www/html
+	RUN echo "This is the content for file.html" > /var/www/html/file.html
+	RUN echo "This is the content for index.html" > /var/www/html/index.html
+	WORKDIR /var/www
+	RUN echo "This is the content for hello.html" > hello
+	RUN echo "This is the content for bye.html" > bye
+	CMD ["ls","-l"]
+	
+	
+	 
+	Skeleton:
+	
+	# Use the official image as a parent image.
+	FROM node:current-slim
+	# Set the working directory.
+	WORKDIR /usr/src/app
+	# Copy the file from your host to your current location.
+	COPY package.json .
+	# Run the command inside your image filesystem.
+	RUN npm install
+	# Add metadata to the image to describe which port the container is listening on at runtime.
+	EXPOSE 8080
+	# Run the specified command within the container.
+	CMD [ "npm", "start" ]
+	# Copy the rest of your app's source code from your host to your image filesystem.
+	COPY . .
+	 
+	Sample:
+	FROM node:current-slim
+	 
+	WORKDIR /usr/src/app
+	COPY package.json .
+	RUN npm install
+	 
+	EXPOSE 8080
+	CMD [ "npm", "start" ]
+	 
+	COPY . .
+	 
+	 
+	
+ 
+Step 2: Build a Docker image using Dockerfile
+Run the following command:
+
+	 docker build -t repository_name:version .
+	#Here . refers to the path (current directory) where Dockerfile is placed.
+	docker build -t ilpubuntu:ver1 .
+ 
+It might take some time to build the image. You can observe the build sequence in the below screenshot:
+ 
+List the Docker images and you will observe that the image has been successfully created.
+ 
+Step 3: Run the container
+Launch the container using image created in step 2.
+
+	#Step 1: Run Docker container
+	 docker run ilpubuntu:ver1
+	#Note: This will run the default command, mentioned in CMD tag of Dockerfile.
+	#Step 2: You can also run a different command inside the container
+	docker run -it ilpubuntu:ver1 /bin/bash
+ 
+
+ 
+
+
+
+From
+	<https://docs.docker.com/get-started/overview/> 
+	<https://lex.infosysapps.com/en/app/toc/lex_12740935231076542000/overview>
+           <https://www.redhat.com/en/topics/containers/> 
+	<https://www.stratoscale.com/blog/devops/linux-containers-benefits-and-market-trends/> 
+	
+         
+Normally enterprise java beans were tightly coupled and dependent on application servers.
+An alternative flexible way came up to remove tightly coupled. 
+Spring framework evolved :
+which is light weight and loosely coupled. 
+Light Weight - It uses simple jars and jdks.
+Loosely coupled- Dependency Injection and Aspect oriented programming are involved.
+Dependency Injection- removes the dependency from programming code so that the application can easily managed and tested. It makes the code loosely coupled and flexible to upgrade.
+AOP-is used for applying common behaviour. These common behaviours generally needs to be called from multiple locations in an application. Therefore, they are called cross cutting in AOP. Spring AOP is solution to the cross cutting concerns.
+1.We need to modularize all cross cutting in a single class-ASPECT
+2.Each aspect of method provide the implementation-ADVICE
+3.Method invocation where aspects are called-JOINT POINTS
+4.On what joint points that advice need to be applied-POINTCUT
+5. At runtime, proxies are created for business object (called TARGET OBJECT) with the aspects linked using JDK Dynamic. This process is called Weaving. The object created is called AOP PROXY.
+
+IOC(Inversion of control)- It is achieved by DI with usage of containers.
+IOC containers are responsible to instantiate , config and assemble the objects. Container gets info from XML files and works to create and hold object for you.
+
+XML file: we define what all objects are to be created inside pojo class
+
+Pojo classes: plain old java object. Those classes which do not extend or implement any other class.
+Poji- plain old java interface.
+
+Two types of containers:
+	1. Core container-Bean Factory
+	2. J2EE container - Application context
+	
+DI is injected by 2 types:
+	1. Setter methods- Partial dependency ca be injected easily, Ioc is achieved(overriding) and flexible for modification.
+	2. Constructors
+	
+	
+Benefits of DI:
+	1. Loosely coupled- facilitating reusability and easy testing
+	2. Separation of responsibility by keeping code and configuration separately. Hence dependencies can be easily modified.
+	3. Allows to replace actual objects with mock objects for testing, this improves testability by writing simple Junit tests that use mock objects.
+Different ways of accessing beans:
+	1. Report Service rp= (Report Service)context.getBean("report service");
+	2. Report Service rp= context.getBean(Report Service.class);
+	3. Report Service rp= context.getBean("report service" ,Report Service.class);
+	
+Autowiring- reduces the amount of configuration required in xml file.
+
+Spring Boot is a Spring module that provides rapid application development, feature to framework. Easy and fast way to setup, configure and run both simple and web-based application. Also helpful in building stand-alone application with minimal config.
+
+Spring framework -xml file + embedded http server(tomcat/jetty)= SPRING BOOT.
+
+Basic annotation - @SpringBootApplication - Enable 3 links
+	1. @EnableAutoConfiguration.
+	2. @ComponentScan
+	3. @Configuration
+AOP using Spring Boot:
+
+Common functionalities :
+CRUD operation, Exception Handling, etc called cross cutting concerns.
+Class in which cross cutting is present is called aspect.
+We can call method that maintain log and send notification from method starting with method.
+
+Spring MVC:
+It is a java framework which is used to build java application. 
+It follows model-view-controller design pattern.
+Spring MVC provides an elegant solution to use mvc in spring framework by help dispatcher servlet.
+	1. @Controller: equivalent to @component 
+	2. @Rest Controller: @Response & @component 
+	3. @Request Mapping: this is used to map the http request to handler methods.
+		@Get Mapping ,@post ,@put ,@delete
+	4. @Request Param
+
+Web Services:
+ is a standard way of communication between web application running on diff platform and framework.
+Adv- 1. Integrate with other systems easily
+	2. Creates reusable components
+	3. Cost saving
+Types
+	1. REST
+	2. SOAP
+
+Spring Microservice: highly scalable, deployable, reliable etc. Many organizations have slowly started moving towards microservice architecture based applications.
+Spring framework provides required components for implementing microservices in a simpler way.
+
+In a microservice architecture, every service can be individually developed and deployed. Atomic in nature. Every service can be individually developed in any programming language and can use different infrastructure for deployment as well. Depending upon the nature of services, microservices can use protocols like AMQP,TCP etc for communication. Service code size will not be considered in microservice it can be of any size. As it is easy to scale. A single application is split into smaller services. One service can call multiple services. As monolithic is divided into microservices according to individual functionality then the full picture of application is not required. Only modified microservice needs to be redeployed after modification not the other microservices. Microservices are no friend latency, it is not reduced in microservices. When microservice has the partitioned database architecture handling multiple databases owned by different services and transaction management can be painful. Microservices are organised around business capabilities. A team must be able to develop and deploy their services with minimal collaboration with other teams.
+
+In monolithic, performance advantages in monolithic since shared-memory access is faster than inter-process communication (IPC). Monolithic apps developed as web services can call other services through rest endpoints, RMI, messaging etc.
+
+Monolithic can be deployed on cloud by incorporating cloud native features.
+
+
+Create a docker hub account/sign in 
+https://hub.docker.com/
+
+# version
+$ docker -v
+
+ # to check 
+$ docker run hello-world 
+
+ # ubuntu container
+$ docker run -it ubuntu bash
+
+# build image 
+#Create docker image : 
+$ docker build -t <name of the docker image>
+
+#run docker image locally:
+$ docker run < name of the docker image>
+
+# run docker image even if it is not present locally by fetching it
+$ docker run -p   8080:8080 <name of docker image>
+// try out with "hello-world"
+
+
+#create docker hub account 
+# login to docker-hub:
+$ sudo docker login
+
+#Tag local image
+$ docker tag  <name of the docker image> <path of the docker hub (shravyadockerid/docker-spring-boot) >
+
+# push the image to docker hub
+$docker push  <path of the docker hub (shravyadockerid/docker-spring-boot) >
+
+# remove docker image locally:
+$ docker image rmi  <multiple image name can be given>
+
+#run the docker image from docker hub
+$ docker run -p 8080:8080  <path of the docker hub (shravyadockerid/docker-spring-boot) >
+
+
+# to get list of container:
+$ docker container ls -a
+
+# list of container with id:
+$ docker container ls -aq
+
+# stop any container:
+$ docker container stop [container_id]
+
+# remove container:
+$ docker container rm [container_id]
+
+
+
+
+
+$ kubectl get nodes
+
+$ kubectl get svc
+
+$ kubectl apply -f docker-demo1.yaml
+
+$ kubectl get pods
+
+$ kubectl logs <pod name>
+
+
+
+
+
+
+
+ 
+
+
+
+	
+	
+		
+		
+		
+		
+
+
+
+
+
+
+	
+	
+	
+	
+	
+
